@@ -1,0 +1,19 @@
+{
+  "name": "cordova-vanilla",
+  "version": "1.0.0",
+  "description": "Vanilla-package-based package for Apache Cordova",
+  "main": "src/index.js",
+  "scripts": {},
+  "keywords": [
+    "cordova",
+    "vanilla",
+    "cordova-vanilla",
+    "web app"
+  ],
+  "author": "Ahmed Ayachi",
+  "license": "ISC",
+  "devDependencies": {
+    "cordova-plugin-filepicker": "github:AhmedAyachi/cordova-plugin-filepicker",
+    "cordova-plugin-media-capture": "^4.0.0"
+  }
+}
