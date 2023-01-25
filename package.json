@@ -1,6 +1,6 @@
 {
   "name": "cordova-vanilla",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vanilla-package-based package for Apache Cordova",
   "main": "src/index.js",
   "scripts": {},

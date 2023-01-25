@@ -1,4 +1,4 @@
-import {View,ViewProps} from "vanilla";
+import {ViewProps,ViewInterface as View} from "vanilla";
 
 
 export default function Attacher(props:ViewProps&{
