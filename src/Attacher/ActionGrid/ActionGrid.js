@@ -22,13 +22,7 @@ export default function ActionGrid(props){
         const {onTrigger}=statics.actions.find(({id})=>actionEl.id===id);
         actionEl.onclick=(event)=>{
             event.stopPropagation();
-            onTrigger&&onTrigger({
-                multiple,
-                onPick:(selection)=>{
-                    onPick&&onPick(selection);
-                    actiongrid.unmount();
-                }
-            });
+            onTrigger&&onTrigger({multiple,onPick});
 
         };
     });
@@ -40,10 +34,6 @@ export default function ActionGrid(props){
             onUnmount&&onUnmount();
         },statics.duration);
     }
-    
-    /* actiongrid.upload=(files)=>{
-        Uploader({parent:actiongrid,files});
-    } */
 
     setTimeout(()=>{actiongrid.style.animation=null},statics.duration+50);
     return actiongrid;

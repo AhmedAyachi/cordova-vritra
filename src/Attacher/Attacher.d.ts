@@ -25,6 +25,9 @@ export default function Attacher(props:ViewProps&{
      */
     sinistral?:boolean,
     icon?:string|((color="black",weight=1)=>string),
+    /**
+     * @default true
+     */
     onPick(selection:AttacherEntry|AttacherEntry[]):void,
 }):Attacher;
 
