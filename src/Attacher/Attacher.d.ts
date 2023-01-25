@@ -1,4 +1,5 @@
 import {ViewProps,ViewInterface as View} from "vanilla";
+import {ActionGrid} from "./ActionGrid/ActionGrid";
 
 
 export default function Attacher(props:ViewProps&{
@@ -41,7 +42,7 @@ interface Attacher extends View {
     /**
      * Returns the ActionGrid element if visible otherwise null;
      */
-    getActionGrid():View,
+    getActionGrid():ActionGrid,
 }
 
 type AttacherEntry=FilePickerEntry&MediaFile;
