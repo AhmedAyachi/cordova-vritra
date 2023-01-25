@@ -38,7 +38,7 @@ interface Attacher extends View {
     /**
      * Returns the ActionGrid element if visible otherwise null;
      */
-    getActionGrid():HTMLElement,
+    getActionGrid():View,
 }
 
 type AttacherEntry=FilePickerEntry&MediaFile;
