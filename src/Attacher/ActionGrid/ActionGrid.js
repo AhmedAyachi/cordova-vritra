@@ -4,22 +4,24 @@ import {image0,camera0,video0,file0} from "../Assets";
 
 
 export default function ActionGrid(props){
-    const {parent,id=useId("actiongrid"),actionColor,sinistral,multiple,onPick,onUnmount}=props;
+    const {parent,id=useId("actiongrid"),actionIds,actionColor,multiple=true,sinistral,onPick,onUnmount}=props;
     const actiongrid=View({
         parent,id,
         style:styles.actiongrid(sinistral),
         className:`${css.actiongrid} ${props.className||""}`,
-    });
+    }),state={
+        actions:getActions(actionIds),
+    },{actions}=state;
 
     actiongrid.innerHTML=`
-        ${map(statics.actions,({id,icon})=>`
+        ${map(actions,({id,icon})=>`
             <img id="${id}" class="button ${css.action}" src="${icon(actionColor)}"/>
         `)}
     `;
 
     const actionEls=actiongrid.querySelectorAll(`.${css.action}`);
     actionEls.forEach(actionEl=>{
-        const {onTrigger}=statics.actions.find(({id})=>actionEl.id===id);
+        const {onTrigger}=actions.find(({id})=>actionEl.id===id);
         actionEl.onclick=(event)=>{
             event.stopPropagation();
             onTrigger&&onTrigger({multiple,onPick});
@@ -42,7 +44,10 @@ export default function ActionGrid(props){
 const statics={
     duration:200,
     actions:[
-        ...[{id:"Image",icon:camera0},{id:"Video",icon:video0}].map(action=>({
+        ...[
+            {id:"photo",key:"Image",icon:camera0},
+            {id:"video",key:"Video",icon:video0},
+        ].map(action=>({
             ...action,
             onTrigger:({multiple,onPick})=>{
                 const {capture}=navigator.device;
@@ -52,14 +57,14 @@ const statics={
             },
         })),
         ...[
-            ((cordova.platformId==="ios")&&{id:"picture",icon:image0}),
+            ((cordova.platformId==="ios")&&{id:"image",icon:image0}),
             {id:"file",icon:file0},
         ].filter(action=>action).map(action=>({
             ...action,
             onTrigger:({multiple,onPick})=>{
                 FilePicker.show({
                     multiple,onPick,
-                    type:action.id==="picture"?"image/*":"*/*",
+                    type:action.id==="image"?"image/*":"*/*",
                 });
             },
         })),
@@ -70,3 +75,15 @@ const statics={
         animation:${sinistral?css.slideLeft:css.slideRight} ${statics.duration}ms ease-in 1 forwards;
     `,
 }
+
+const getActions=(ids)=>{
+    const {actions}=statics;
+    let results;
+    if(ids&&ids.length){
+        results=ids.map(id=>actions.find(action=>action.id===id)).filter(item=>item);
+    }
+    else{
+        results=actions;
+    }
+    return results;
+};

@@ -5,7 +5,7 @@ import {paperclip0} from "./Assets";
 
 
 export default function Attacher(props){
-    const {parent,id=useId("attacher"),icon=paperclip0,color="black",multiple=true,sinistral,onPick}=props;
+    const {parent,id=useId("attacher"),icon=paperclip0,color="black"}=props;
     const attacher=View({
         parent,id,
         style:props.style,
@@ -26,10 +26,10 @@ export default function Attacher(props){
         if(toggled){
             if(!actiongrid){
                 state.actiongrid=ActionGrid({
+                    ...props,id:undefined,
                     parent:attacher,
                     className:props.actionGridClassName,
                     actionColor:props.actionColor||color,
-                    sinistral,multiple,onPick,
                     onUnmount:()=>{
                         state.actiongrid=null;
                     },

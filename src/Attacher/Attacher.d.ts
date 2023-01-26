@@ -15,6 +15,12 @@ export default function Attacher(props:ViewProps&{
      */
     actionColor?:string,
     /**
+     * Shows and arranges the specified actions
+     * @default ["photo","video","image","file"]
+     * @see "image" id is available only for ios because can't pick documents and images at the same time on ios
+     */
+    actionIds:("photo"|"video"|"image"|"file")[],
+    /**
      * Allows Picking multiple files at the same time
      * @default true
      * @see Only affects the file picking action, camera and video actions always allow one file at a time
