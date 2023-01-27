@@ -51,7 +51,8 @@ const statics={
             ...action,
             onTrigger:({multiple,onPick})=>{
                 const {capture}=navigator.device;
-                capture[`capture${action.id}`](files=>{
+                capture[`capture${action.key}`](files=>{
+                    files.forEach(setMediaFileToFilePickerEntry);
                     onPick&&onPick(multiple?files:files[0]);
                 });
             },
@@ -87,3 +88,26 @@ const getActions=(ids)=>{
     }
     return results;
 };
+
+const setMediaFileToFilePickerEntry=(mediafile)=>{
+    const fullpath=mediafile.fullpath=mediafile.fullPath;
+    if(fullpath.startsWith("file://")){
+        mediafile.path=fullpath.substring(7);
+    }
+    const pathparts=mediafile.path?.split("/");
+    if(pathparts){
+        pathparts.pop();
+        mediafile.location=pathparts.join("/");
+    }
+    else{
+        mediafile.location="";
+    }
+
+    mediafile.lastModified=mediafile.lastModifiedDate;
+    delete mediafile.fullPath;
+    delete mediafile.localURL
+    delete mediafile.lastModifiedDate;
+    delete mediafile.start;
+    delete mediafile.end;
+
+}
