@@ -1,4 +1,4 @@
-import {ViewProps,ViewInterface as View} from "vanilla";
+import {ViewProps,ViewInterface as View} from "cherries";
 import {ActionGrid} from "./ActionGrid/ActionGrid";
 
 

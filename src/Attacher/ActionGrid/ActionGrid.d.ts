@@ -1,4 +1,4 @@
-import {ViewInterface as View} from "vanilla"
+import {ViewInterface as View} from "cherries"
 
 
 interface ActionGrid extends View {

@@ -21,5 +21,8 @@
       "cordova-plugin-media-capture": {},
       "cordova-plugin-filepicker": {}
     }
+  },
+  "dependencies": {
+    "cherries": "github:AhmedAyachi/Cherries"
   }
 }
