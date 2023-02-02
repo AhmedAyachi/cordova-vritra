@@ -1,13 +1,13 @@
 {
   "name": "cordova-cherries",
   "version": "1.0.0",
-  "description": "Vanilla-package-based package for Apache Cordova",
+  "description": "Cherries-package-based package for Apache Cordova",
   "main": "src/index.js",
   "scripts": {},
   "keywords": [
     "cordova",
-    "vanilla",
-    "cordova-vanilla",
+    "cherries",
+    "cordova-cherries",
     "web app"
   ],
   "author": "Ahmed Ayachi",
@@ -15,5 +15,11 @@
   "devDependencies": {
     "cordova-plugin-filepicker": "github:AhmedAyachi/cordova-plugin-filepicker",
     "cordova-plugin-media-capture": "^4.0.0"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-media-capture": {},
+      "cordova-plugin-filepicker": {}
+    }
   }
 }
