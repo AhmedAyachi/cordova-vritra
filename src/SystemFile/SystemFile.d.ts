@@ -1,5 +1,7 @@
 
-
+/**
+ * A simpler way to use cordova-plugin-file APIs
+ */
 export default class SystemFile {
 
     readonly name:String;
