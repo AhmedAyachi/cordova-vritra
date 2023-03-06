@@ -55,15 +55,15 @@ export default class SystemFile {
             window.resolveLocalFileSystemURL(this.fullpath,(entry)=>{
                 entry.createWriter(fileWriter=>{
                     try{
-                        fileWriter.seek(fileWriter.length);
+                        const {length}=fileWriter;
+                        length&&fileWriter.seek(length);
                         fileWriter.onwriteend=callback;
                         fileWriter.onerror=fallback;
-                        fileWriter.write(new Blob([content]),{type:"text/plain"});
+                        fileWriter.write(new Blob([text]),{type:"text/plain"});
                     }
-                    catch{
-                        fallback&&fallback();
+                    catch(error){
+                        fallback&&fallback(error);
                     }
-
                 });
             });
         }
