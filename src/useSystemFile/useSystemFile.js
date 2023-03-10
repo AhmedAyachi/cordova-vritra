@@ -1,28 +1,48 @@
 
 
-const timeout=100;
-
-export default class SystemFile {
-    constructor({name="NewFile.txt",location=cordova.file.dataDirectory},callback,fallback){
-        this.name=name;
-        this.fullpath=(location||"")+name;
-        this.location=location;
+export default function useSystemFile(props,callback,fallback){
+    let name,location;
+    if(typeof(props)==="string"){
+        const index=props.lastIndexOf("/");
+        name=props.substring(index+1);
+        location=props.substring(0,index);
+    }
+    else{
+        name=props.name||"NewFile.txt";
+        location=props.location||cordova.file.dataDirectory;
+    }
+    return new Promise((resolve,reject)=>{
         if(cordova.platformId==="browser"){
             setTimeout(()=>{
                 if(localStorage.getItem(name)===null){
                     localStorage.setItem(name,"");
                 }
-                callback&&callback(this);
+                resolve();
             },timeout);
         }
         else{
             window.resolveLocalFileSystemURL(location,(folder)=>{
-                folder.getFile(name,{create:true},(entry)=>{
-                    this.fullpath=entry.nativeURL;
-                    callback&&callback(this);
-                },fallback);
+                folder.getFile(name,{create:true},resolve,reject);
             });
         }
+    }).
+    then(entry=>{
+        const fullpath=entry?.nativeURL;
+        const sysfile=new SystemFile({name,location,fullpath});
+        callback&&callback(sysfile);
+        return sysfile;
+    }).
+    catch(error=>{
+        fallback&&fallback(error);
+    });
+}
+
+class SystemFile {
+    constructor({name,location,fullpath}){
+        this.name=name;
+        this.fullpath=fullpath||((location||"")+name);
+        this.location=location;
+        Object.seal(this);
     };
 
     write(text="",callback,fallback){
@@ -103,8 +123,8 @@ export default class SystemFile {
         }
     };
 
-    static readAsDataURL(fullpath,callback,fallback){
-        window.resolveLocalFileSystemURL(fullpath,(entry)=>{
+    readAsDataURL(callback,fallback){
+        window.resolveLocalFileSystemURL(this.fullpath,(entry)=>{
             entry.file(file=>{
                 const reader=new FileReader();
                 reader.onloadend=()=>{
@@ -128,3 +148,5 @@ export default class SystemFile {
         })});
     } */
 }
+
+const timeout=100;
