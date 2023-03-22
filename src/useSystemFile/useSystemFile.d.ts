@@ -3,6 +3,7 @@
  * A simpler way to use cordova-plugin-file API
  * @ Creates the file if not found
  * @returns A Promise so you can use await instead of the callback/fallback params
+ * @see Browser support is for development only. Uses local storage items as files
  */
 export default function useSystemFile(
     props:{
