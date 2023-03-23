@@ -1,4 +1,4 @@
-import {useId,View} from "cherries";
+import {useId,CherryView} from "cherries";
 import css from "./Attacher.module.css";
 import ActionGrid from "./ActionGrid/ActionGrid";
 import {paperclip0} from "./Assets";
@@ -6,7 +6,7 @@ import {paperclip0} from "./Assets";
 
 export default function Attacher(props){
     const {parent,id=useId("attacher"),icon=paperclip0,color="black"}=props;
-    const attacher=View({
+    const attacher=CherryView({
         parent,id,
         style:props.style,
         position:props.position,

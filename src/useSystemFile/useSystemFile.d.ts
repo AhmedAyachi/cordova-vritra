@@ -28,8 +28,7 @@ export default function useSystemFile(
     fallback:(error:Object)=>void,
 ):Promise<SystemFile>;
 
-interface SystemFile {
-
+export interface SystemFile {
     readonly name:String;
     readonly fullpath:String;
     readonly location:String;
@@ -65,4 +64,4 @@ interface SystemFile {
 }
 
 type SystemFileCallBack=()=>void;
-type SystemFileFallBack=(error:Object)=>void;
+type SystemFileFallBack=(error:Error)=>void;

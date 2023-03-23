@@ -23,7 +23,7 @@ export default function useSystemFile(props,callback,fallback){
         else{
             window.resolveLocalFileSystemURL(location,(folder)=>{
                 folder.getFile(name,{create:true},resolve,reject);
-            });
+            },reject);
         }
     }).
     then(entry=>{
