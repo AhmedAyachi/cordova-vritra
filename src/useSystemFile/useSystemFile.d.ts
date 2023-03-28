@@ -35,7 +35,7 @@ export interface SystemFile {
     /**
      * Overwrites the file content
      */
-    write(text:string,callback:SystemFileCallBack,fallback:SystemFileFallBack):void;
+    write(text:string,callback:SystemFileCallback,fallback:SystemFileFallback):void;
 
     /**
      * Adds content to the end of the file 
@@ -43,25 +43,25 @@ export interface SystemFile {
      * @param callback 
      * @param fallback 
      */
-    append(text:string,callback:SystemFileCallBack,fallback:SystemFileFallBack):void;
+    append(text:string,callback:SystemFileCallback,fallback:SystemFileFallback):void;
 
     /**
      * Reads the file content as text
      */
-    onRead(callback:(content:String)=>void,fallback:SystemFileFallBack):void;
+    onRead(callback:(content:String)=>void,fallback:SystemFileFallback):void;
 
     /**
      * Deletes the file
      */
-    delete(callback:SystemFileCallBack,fallback:SystemFileFallBack):void;
+    delete(callback:SystemFileCallback,fallback:SystemFileFallback):void;
 
     /**
      * Reads a file as data url.
      * 
      * @see Use it to read for example image files
      */
-    readAsDataURL(callback:(data:string|ArrayBuffer|null)=>void,fallback:SystemFileFallBack):void;
+    readAsDataURL(callback:(data:string|ArrayBuffer|null)=>void,fallback:SystemFileFallback):void;
 }
 
-type SystemFileCallBack=()=>void;
-type SystemFileFallBack=(error:Error)=>void;
+type SystemFileCallback=()=>void;
+type SystemFileFallback=(error:Error)=>void;

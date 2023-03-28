@@ -1,4 +1,4 @@
-import {SystemFileFallBack,SystemFile} from "../useSystemFile/useSystemFile";
+import {SystemFileFallback,SystemFile} from "../useSystemFile/useSystemFile";
 
 /**
  * Gets/creates a folder
@@ -25,23 +25,23 @@ interface SystemFolder {
     useFile(
         name:string,
         callback:(sysfile:SystemFile)=>void,
-        fallback:SystemFolderFallBack,
+        fallback:SystemFolderFallback,
     ):Promise<SystemFile>,
 
     useFolder(
         name:string,
         callback:(sysfolder:SystemFolder)=>void,
-        fallback:SystemFolderFallBack,
+        fallback:SystemFolderFallback,
     ):Promise<SystemFolder>,
 
     useEntries(
         callback:(entries:SystemFolderEntry[])=>void,
-        fallback:SystemFolderFallBack,
+        fallback:SystemFolderFallback,
     ):void,
 }
 
-type SystemFolderCallBack=()=>void;
-type SystemFolderFallBack=(error:Error)=>void;
+type SystemFolderCallback=()=>void;
+type SystemFolderFallback=(error:Error)=>void;
 
 interface SystemFolderEntry {
     readonly name:String,
@@ -50,11 +50,11 @@ interface SystemFolderEntry {
 
     toSystemFile(
         callback:(sysfile:SystemFile)=>void,
-        fallback:SystemFileFallBack,
+        fallback:SystemFileFallback,
     ):Promise<SystemFile>,
 
     toSystemFolder(
         callback:(sysfolder:SystemFolder)=>void,
-        fallback:SystemFolderFallBack,
+        fallback:SystemFolderFallback,
     ):Promise<SystemFolder>,
 }
