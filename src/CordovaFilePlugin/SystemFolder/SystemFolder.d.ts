@@ -1,7 +1,8 @@
-import {SystemFileFallback,SystemFile} from "../useSystemFile/useSystemFile";
+import {SystemEntry} from "../SystemEntry/SystemEntry";
+import {SystemFileFallback,SystemFile} from "../SystemFile/SystemFile";
 
 /**
- * Gets/creates a folder
+ * Uses a system folder and creates it if it does not exist
  * @param props 
  * @param callback 
  * @param fallback 
@@ -17,10 +18,7 @@ export default function useSystemFolder(
     fallback:(error:Error)=>void,
 ):Promise<SystemFolder>;
 
-interface SystemFolder {
-    readonly name:String;
-    readonly fullpath:String;
-    readonly location:String;
+interface SystemFolder extends SystemEntry {
 
     useFile(
         name:string,
@@ -37,10 +35,9 @@ interface SystemFolder {
     useEntries(
         callback:(entries:SystemFolderEntry[])=>void,
         fallback:SystemFolderFallback,
-    ):void,
+    ):Promise<SystemFolderEntry[]>,
 }
 
-type SystemFolderCallback=()=>void;
 type SystemFolderFallback=(error:Error)=>void;
 
 interface SystemFolderEntry {

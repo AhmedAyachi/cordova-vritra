@@ -1,22 +1,11 @@
-import useSystemFile from "../useSystemFile/useSystemFile";
+import SystemEntry,{getSystemEntryProps} from "../SystemEntry/SystemEntry";
+import useSystemFile from "../SystemFile/SystemFile";
 
 
 export default function useSystemFolder(props,callback,fallback){
-    let location,name;
-    if(typeof(props)==="string"){
-        const index=props.lastIndexOf("/");
-        name=props.substring(index+1);
-        location=props.substring(0,index);
-    }
-    else{
-        name=props.name||"NewFolder";
-        location=props.location||cordova.file.dataDirectory;
-    }
+    const {location,name="NewFolder"}=getSystemEntryProps(props);
     return new Promise((resolve,reject)=>{
-        if(cordova.platformId==="browser"){
-            console.log(`folder ${name} created`);
-            resolve();
-        }
+        if(cordova.platformId==="browser"){resolve()}
         else{
             window.resolveLocalFileSystemURL(location,(folder)=>{
                 folder.getDirectory(name,{create:true},resolve,reject);
@@ -34,14 +23,12 @@ export default function useSystemFolder(props,callback,fallback){
     });
 }
 
-class SystemFolder {
-    constructor({name,location,fullpath}){
-        this.location=location;
-        this.name=name;
-        this.fullpath=fullpath||((location||"")+name);
-        Object.seal(this);
-    };
+class SystemFolder extends SystemEntry {
 
+    constructor(props){
+        super(props);
+    };
+    
     useFile(name,callback,fallback){
         return useSystemFile({location:this.fullpath,name},callback,fallback);
     }
@@ -50,14 +37,22 @@ class SystemFolder {
         return useSystemFolder({location:this.fullpath,name},callback,fallback);
     }
 
-    useEntries(callback,fallback){
-        window.resolveLocalFileSystemURL(this.fullpath,(folder)=>{
-            const reader=folder.createReader();
-            reader.readEntries(entries=>{
-                callback&&callback(entries.map(entry=>new SystemFolderEntry(entry)));
-            },fallback);
-        });
-    }
+    useEntries(callback,fallback){return new Promise((resolve,reject)=>{
+        if(cordova.platformId==="browser"){resolve()}
+        else{
+            window.resolveLocalFileSystemURL(this.fullpath,(entry)=>{
+                const reader=entry.createReader();
+                reader.readEntries(entries=>{
+                    resolve(entries.map(entry=>new SystemFolderEntry(entry)));
+                },reject);
+            },reject);
+        }
+    }).
+    then(callback).
+    catch(error=>{
+        fallback&&fallback(error);
+        return Promise.reject(error);
+    })};
 }
 
 class SystemFolderEntry {
