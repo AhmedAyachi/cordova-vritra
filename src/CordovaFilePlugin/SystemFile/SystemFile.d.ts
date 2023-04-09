@@ -1,4 +1,4 @@
-import {SystemEntry} from "../SystemEntry/SystemEntry";
+import {SystemEntry,SystemEntryCallback,SystemEntryFallback} from "../SystemEntry/SystemEntry";
 
 /**
  * A simpler way to use cordova-plugin-file API
@@ -18,7 +18,7 @@ export default function useSystemFile(
         location:string,
     },
     callback:(sysfile:SystemFile)=>void,
-    fallback:SystemFileFallback,
+    fallback:SystemEntryFallback,
 ):Promise<SystemFile>;
 export default function useSystemFile(
     /**
@@ -26,7 +26,7 @@ export default function useSystemFile(
      */
     fullpath:string,
     callback:(sysfile:SystemFile)=>void,
-    fallback:SystemFileFallback,
+    fallback:SystemEntryFallback,
 ):Promise<SystemFile>;
 
 export interface SystemFile extends SystemEntry {
@@ -34,7 +34,7 @@ export interface SystemFile extends SystemEntry {
     /**
      * Overwrites the file content
      */
-    write(text:string,callback:SystemFileCallback,fallback:SystemFileFallback):Promise<undefined>;
+    write(text:string,callback:SystemEntryCallback,fallback:SystemEntryFallback):Promise<undefined>;
 
     /**
      * Adds content to the end of the file 
@@ -42,26 +42,23 @@ export interface SystemFile extends SystemEntry {
      * @param callback 
      * @param fallback 
      */
-    append(text:string,callback:SystemFileCallback,fallback:SystemFileFallback):Promise<undefined>;
+    append(text:string,callback:SystemEntryCallback,fallback:SystemEntryFallback):Promise<undefined>;
 
     /**
      * @deprecated use readAsText instead
      * Reads the file content as text
      */
-    onRead(callback:(content:String)=>void,fallback:SystemFileFallback):void;
+    onRead(callback:(content:String)=>void,fallback:SystemEntryFallback):void;
 
     /**
      * Reads the file content as text
      */
-    readAsText(callback:(content:String)=>void,fallback:SystemFileFallback):Promise<String>;
+    readAsText(callback:(content:String)=>void,fallback:SystemEntryFallback):Promise<String>;
 
     /**
      * Reads a file as data url.
      * 
-     * @see Use it to read for example image files
+     * @see Use it to read for example image files to get the image content as base64 string
      */
-    readAsDataURL(callback:(data:string|null)=>void,fallback:SystemFileFallback):Promise<string|null>;
+    readAsDataURL(callback:(data:string|null)=>void,fallback:SystemEntryFallback):Promise<String|null>;
 }
-
-type SystemFileCallback=()=>void;
-type SystemFileFallback=(error:Error)=>void;

@@ -1,5 +1,5 @@
-import {SystemEntry} from "../SystemEntry/SystemEntry";
-import {SystemFileFallback,SystemFile} from "../SystemFile/SystemFile";
+import {SystemEntry,SystemEntryFallback} from "../SystemEntry/SystemEntry";
+import {SystemFile} from "../SystemFile/SystemFile";
 
 /**
  * Uses a system folder and creates it if it does not exist
@@ -23,22 +23,20 @@ interface SystemFolder extends SystemEntry {
     useFile(
         name:string,
         callback:(sysfile:SystemFile)=>void,
-        fallback:SystemFolderFallback,
+        fallback:SystemEntryFallback,
     ):Promise<SystemFile>,
 
     useFolder(
         name:string,
         callback:(sysfolder:SystemFolder)=>void,
-        fallback:SystemFolderFallback,
+        fallback:SystemEntryFallback,
     ):Promise<SystemFolder>,
 
     useEntries(
         callback:(entries:SystemFolderEntry[])=>void,
-        fallback:SystemFolderFallback,
+        fallback:SystemEntryFallback,
     ):Promise<SystemFolderEntry[]>,
 }
-
-type SystemFolderFallback=(error:Error)=>void;
 
 interface SystemFolderEntry {
     readonly name:String,
@@ -47,11 +45,11 @@ interface SystemFolderEntry {
 
     toSystemFile(
         callback:(sysfile:SystemFile)=>void,
-        fallback:SystemFileFallback,
+        fallback:SystemEntryFallback,
     ):Promise<SystemFile>,
 
     toSystemFolder(
         callback:(sysfolder:SystemFolder)=>void,
-        fallback:SystemFolderFallback,
+        fallback:SystemEntryFallback,
     ):Promise<SystemFolder>,
 }
