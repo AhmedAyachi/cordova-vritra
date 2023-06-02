@@ -23,6 +23,6 @@
     }
   },
   "dependencies": {
-    "cherries": "github:AhmedAyachi/Cherries"
+    "cherries": "file:../Cherries"
   }
 }

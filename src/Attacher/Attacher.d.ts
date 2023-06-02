@@ -2,7 +2,7 @@ import {ViewProps,ViewInterface as View} from "cherries";
 import {ActionGrid} from "./ActionGrid/ActionGrid";
 
 
-export default function Attacher(props:ViewProps&{
+export default function Attacher(props:ViewProps<"div">&{
     actionGridClassName:string,
     /**
      * Attacher/actions icons color
@@ -38,7 +38,7 @@ export default function Attacher(props:ViewProps&{
     onPick(selection:AttacherEntry|AttacherEntry[]):void,
 }):Attacher;
 
-interface Attacher extends View {
+interface Attacher extends View<"div"> {
     /**
      * Shows and hides the action grid.
      * @param toggled If true, shows the action grid otherwise hides it
