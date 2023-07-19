@@ -31,14 +31,14 @@ export default function Attacher(props:ViewProps<"div">&{
      * @default false
      */
     sinistral?:boolean,
-    icon?:string|((color="black",weight=1)=>string),
+    icon?:string|((color:string,weight:number)=>string),
     /**
      * @default true
      */
     onPick(selection:AttacherEntry|AttacherEntry[]):void,
 }):Attacher;
 
-interface Attacher extends View<"div"> {
+type Attacher=View<"div">&{
     /**
      * Shows and hides the action grid.
      * @param toggled If true, shows the action grid otherwise hides it

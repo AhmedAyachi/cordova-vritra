@@ -1,9 +1,9 @@
 import {ViewInterface as View} from "cherries"
 
 
-interface ActionGrid extends View {
+type ActionGrid=View<"div">&{
     /**
      * Same as attacher.toggle(false)
      */
     unmount():void,
-}
+};
