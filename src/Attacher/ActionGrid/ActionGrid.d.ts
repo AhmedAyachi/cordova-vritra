@@ -1,4 +1,4 @@
-import {ViewInterface as View} from "cherries"
+import {ViewInterface as View} from "corella"
 
 
 type ActionGrid=View<"div">&{

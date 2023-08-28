@@ -1,4 +1,4 @@
-import {useId,CherryView} from "cherries";
+import {useId,CherryView} from "corella";
 import css from "./Attacher.module.css";
 import ActionGrid from "./ActionGrid/ActionGrid";
 import {paperclip0} from "./Assets";

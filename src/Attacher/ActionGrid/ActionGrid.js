@@ -1,4 +1,4 @@
-import {useId,View,map} from "cherries";
+import {useId,View,map} from "corella";
 import css from "./ActionGrid.module.css";
 import {image0,camera0,video0,file0} from "../Assets";
 

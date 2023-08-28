@@ -1,13 +1,13 @@
 {
-  "name": "cordova-cherries",
+  "name": "cordova-corella",
   "version": "1.0.0",
-  "description": "Cherries-package-based package for Apache Cordova",
+  "description": "Corella-package-based package for Apache Cordova",
   "main": "src/index.js",
   "scripts": {},
   "keywords": [
     "cordova",
-    "cherries",
-    "cordova-cherries",
+    "corella",
+    "cordova-corella",
     "web app"
   ],
   "author": "Ahmed Ayachi",
@@ -23,6 +23,6 @@
     }
   },
   "dependencies": {
-    "cherries": "github:AhmedAyachi/Cherries"
+    "corella": "github:AhmedAyachi/Corella"
   }
 }

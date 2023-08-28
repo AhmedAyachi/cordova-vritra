@@ -1,4 +1,4 @@
-declare module "cordova-cherries";
+declare module "cordova-corella";
 
 
 export * from "./src/CordovaFilePlugin";
