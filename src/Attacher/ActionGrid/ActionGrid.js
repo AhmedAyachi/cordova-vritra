@@ -1,13 +1,12 @@
-import {useId,View,map} from "corella";
+import {View,map} from "corella";
 import css from "./ActionGrid.module.css";
 import {image0,camera0,video0,file0} from "../Assets";
 
 
 export default function ActionGrid(props){
-    const {parent,id=useId("actiongrid"),actionIds,actionColor,multiple=true,sinistral,onPick,onUnmount}=props;
+    const {parent,actionIds,actionColor,multiple=true,sinistral,onPick,onUnmount}=props;
     const actiongrid=View({
-        parent,id,
-        style:styles.actiongrid(sinistral),
+        parent,style:styles.actiongrid(sinistral),
         className:`${css.actiongrid} ${props.className||""}`,
     }),state={
         actions:getActions(actionIds),
