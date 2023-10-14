@@ -1,4 +1,4 @@
-import {View,map} from "corella";
+import {View,map} from "wurm";
 import css from "./ActionGrid.module.css";
 import {image0,camera0,video0,file0} from "../Assets";
 
@@ -51,7 +51,7 @@ const statics={
             onTrigger:({multiple,onPick})=>{
                 const {capture}=navigator.device;
                 capture[`capture${action.key}`](files=>{
-                    files.forEach(setMediaFileToFilePickerEntry);
+                    files.forEach(setMediaFileToFileExplorerEntry);
                     onPick&&onPick(multiple?files:files[0]);
                 });
             },
@@ -62,7 +62,7 @@ const statics={
         ].filter(action=>action).map(action=>({
             ...action,
             onTrigger:({multiple,onPick})=>{
-                FilePicker.show({
+                FileExplorer.show({
                     multiple,onPick,
                     type:action.id==="image"?"image/*":"*/*",
                 });
@@ -88,7 +88,7 @@ const getActions=(ids)=>{
     return results;
 };
 
-const setMediaFileToFilePickerEntry=(mediafile)=>{
+const setMediaFileToFileExplorerEntry=(mediafile)=>{
     const fullpath=mediafile.fullpath=mediafile.fullPath;
     if(fullpath.startsWith("file://")){
         mediafile.path=fullpath.substring(7);

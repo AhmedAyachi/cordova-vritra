@@ -1,28 +1,28 @@
 {
-  "name": "cordova-corella",
-  "version": "1.0.0",
-  "description": "Corella-package-based package for Apache Cordova",
+  "name": "cordova-wurm",
+  "version": "0.0.1",
+  "description": "wurm-based package for Apache Cordova",
   "main": "src/index.js",
   "scripts": {},
   "keywords": [
     "cordova",
-    "corella",
-    "cordova-corella",
+    "wurm",
+    "cordova-wurm",
     "web app"
   ],
   "author": "Ahmed Ayachi",
   "license": "ISC",
   "devDependencies": {
-    "cordova-plugin-filepicker": "github:AhmedAyachi/cordova-plugin-filepicker",
-    "cordova-plugin-media-capture": "^4.0.0"
+    "cordova-plugin-media-capture": "^4.0.0",
+    "wurm-plugin-fileexplorer": "^0.0.1"
   },
   "cordova": {
     "plugins": {
       "cordova-plugin-media-capture": {},
-      "cordova-plugin-filepicker": {}
+      "wurm-plugin-fileexplorer": {}
     }
   },
   "dependencies": {
-    "corella": "github:AhmedAyachi/Corella"
+    "wurm": "^0.0.1"
   }
 }

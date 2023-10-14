@@ -1,4 +1,4 @@
-import {ViewProps,ViewInterface as View} from "corella";
+import {ViewProps,ViewInterface as View} from "wurm";
 import {ActionGrid} from "./ActionGrid/ActionGrid";
 
 
@@ -51,4 +51,4 @@ type Attacher=View<"div">&{
     getActionGrid():ActionGrid,
 }
 
-type AttacherEntry=FilePickerEntry&MediaFile;
+type AttacherEntry=FileExplorerEntry&MediaFile;

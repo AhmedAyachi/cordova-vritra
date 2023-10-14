@@ -1,4 +1,4 @@
-import {ViewInterface as View} from "corella"
+import {ViewInterface as View} from "wurm"
 
 
 type ActionGrid=View<"div">&{
