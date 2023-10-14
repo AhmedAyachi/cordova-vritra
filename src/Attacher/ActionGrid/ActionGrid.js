@@ -62,7 +62,7 @@ const statics={
         ].filter(action=>action).map(action=>({
             ...action,
             onTrigger:({multiple,onPick})=>{
-                FileExplorer.show({
+                FileExplorer.pick({
                     multiple,onPick,
                     type:action.id==="image"?"image/*":"*/*",
                 });
