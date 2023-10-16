@@ -1,4 +1,4 @@
-declare module "cordova-wurm";
+declare module "cordova-vritra";
 
 
 export * from "./src/CordovaFilePlugin";

@@ -1,4 +1,4 @@
-import {View,map} from "wurm";
+import {View,map} from "vritra";
 import css from "./ActionGrid.module.css";
 import {image0,camera0,video0,file0} from "../Assets";
 

@@ -1,28 +1,28 @@
 {
-  "name": "cordova-wurm",
+  "name": "cordova-vritra",
   "version": "0.0.1",
-  "description": "wurm-based package for Apache Cordova",
+  "description": "A package for cordova-vritra themed projects that provides components and functions to facilitate certain cordova plugins API usage",
   "main": "src/index.js",
   "scripts": {},
   "keywords": [
     "cordova",
-    "wurm",
-    "cordova-wurm",
+    "vritra",
+    "cordova-vritra",
     "web app"
   ],
   "author": "Ahmed Ayachi",
   "license": "ISC",
   "devDependencies": {
     "cordova-plugin-media-capture": "^4.0.0",
-    "wurm-plugin-fileexplorer": "^0.0.1"
+    "vritra-plugin-fileexplorer": "^0.0.1"
   },
   "cordova": {
     "plugins": {
       "cordova-plugin-media-capture": {},
-      "wurm-plugin-fileexplorer": {}
+      "vritra-plugin-fileexplorer": {}
     }
   },
   "dependencies": {
-    "wurm": "^0.0.1"
+    "vritra": "^0.0.1"
   }
 }

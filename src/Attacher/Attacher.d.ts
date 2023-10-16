@@ -1,4 +1,4 @@
-import {ViewProps,ViewInterface as View} from "wurm";
+import {ViewProps,ViewInterface as View} from "vritra";
 import {ActionGrid} from "./ActionGrid/ActionGrid";
 
 

@@ -1,4 +1,4 @@
-import {ViewInterface as View} from "wurm"
+import {ViewInterface as View} from "vritra"
 
 
 type ActionGrid=View<"div">&{
