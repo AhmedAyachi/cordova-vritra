@@ -3,21 +3,13 @@
   "version": "0.0.2",
   "description": "A package for cordova-vritra themed projects that provides components and functions to facilitate certain cordova plugins API usage",
   "main": "src/index.js",
-  "scripts": {},
-  "keywords": [
-    "cordova",
-    "vritra",
-    "cordova-vritra",
-    "web app"
-  ],
-  "author": "Ahmed Ayachi",
-  "license": "ISC",
   "peerDependencies": {
     "vritra": ">=0.0.1",
     "cordova-plugin-media-capture": "^4.0.0",
     "vritra-plugin-fileexplorer": "^0.0.1"
   },
   "peerDependenciesMeta": {
+    "vritra":{"optional": false},
     "cordova-plugin-media-capture":{"optional": true},
     "vritra-plugin-fileexplorer": {"optional": true}
   },
@@ -26,5 +18,13 @@
       "cordova-plugin-media-capture": {},
       "vritra-plugin-fileexplorer": {}
     }
-  }
+  },
+  "keywords": [
+    "cordova","vritra",
+    "cordova-vritra",
+    "media","fileexplorer",
+    "photo","camera"
+  ],
+  "author": "Ahmed Ayachi",
+  "license": "MIT"
 }
