@@ -1,12 +1,12 @@
 {
   "name": "cordova-vritra",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A package for cordova-vritra themed projects that provides components and functions to facilitate certain cordova plugins API usage",
   "main": "src/index.js",
   "peerDependencies": {
     "vritra": ">=0.0.1",
-    "cordova-plugin-media-capture": "^4.0.0",
-    "vritra-plugin-fileexplorer": "^0.0.1"
+    "cordova-plugin-media-capture": ">=4.0.0",
+    "vritra-plugin-fileexplorer": ">=1.0.0"
   },
   "peerDependenciesMeta": {
     "vritra":{"optional": false},
