@@ -7,8 +7,14 @@ export default function Attacher(props:ViewProps<"div">&{
     /**
      * Attacher/actions icons color
      * @default "black"
+     * @deprecated use tintColor instead
      */
     color?:string,
+    /**
+     * Attacher/actions icons color
+     * @default "black"
+     */
+    tintColor?:string,
     /**
      * Actions icons color
      * @default color prop value

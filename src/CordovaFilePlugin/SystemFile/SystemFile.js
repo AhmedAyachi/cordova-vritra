@@ -20,6 +20,13 @@ export default function useSystemFile(props,callback,fallback){
                 }
             },timeout);
         }
+        else if(cordova.platformId==="electron"){
+            window.requestFileSystem(LocalFileSystem.PERSISTENT,0,(fileSystem)=>{
+                fileSystem.root.getDirectory(location,{create:true},(folder)=>{
+                    folder.getFile(name,{create:true},resolve,reject);
+                });
+            },reject);
+        }
         else{
             window.resolveLocalFileSystemURL(location,(folder)=>{
                 folder.getFile(name,{create:true},resolve,reject);

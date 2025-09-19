@@ -5,7 +5,7 @@ import {paperclip0} from "./Assets";
 
 
 export default function Attacher(props){
-    const {parent,id=useId("attacher"),icon=paperclip0,color="black"}=props;
+    const {parent,id=useId("attacher"),icon=paperclip0,tintColor="black"}=props;
     const attacher=NativeView({
         parent,id,
         style:props.style,
@@ -16,7 +16,7 @@ export default function Attacher(props){
     };
 
     attacher.innerHTML=`
-        <img class="button ${css.icon}" alt="attachment" src="${typeof(icon)==="function"?icon(color):icon}"/>
+        <img class="button ${css.icon}" alt="attachment" src="${typeof(icon)==="function"?icon(tintColor):icon}"/>
     `;
 
     attacher.onclick=()=>{attacher.toggle()};
@@ -29,7 +29,7 @@ export default function Attacher(props){
                     ...props,id:undefined,
                     parent:attacher,
                     className:props.actionGridClassName,
-                    actionColor:props.actionColor||color,
+                    actionColor:props.actionColor||tintColor,
                     onUnmount:()=>{
                         state.actiongrid=null;
                     },
