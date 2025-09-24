@@ -1,26 +1,34 @@
+import {isValidFolderName} from "../index";
 import SystemEntry,{getSystemEntryProps} from "../SystemEntry/SystemEntry";
 import useSystemFile from "../SystemFile/SystemFile";
 
 
 export default function useSystemFolder(props,callback,fallback){
     const {location,name="NewFolder"}=getSystemEntryProps(props);
-    return new Promise((resolve,reject)=>{
-        if(cordova.platformId==="browser"){resolve()}
+    if(isValidFolderName(name)) return new Promise((resolve,reject)=>{
+        if(cordova.platformId==="browser") resolve();
+        else if(cordova.platformId==="electron"){
+            window.requestFileSystem(LocalFileSystem.PERSISTENT,0,(fileSystem)=>{
+                fileSystem.root.getDirectory(location,{create:true},(folder)=>{
+                    folder.getDirectory(name,{create:true},resolve,reject);
+                });
+            },reject);
+        }
         else{
             window.resolveLocalFileSystemURL(location,(folder)=>{
                 folder.getDirectory(name,{create:true},resolve,reject);
             },reject);
         }
-    }).
-    then(entry=>{
+    }).then(entry=>{
         const fullpath=entry?.nativeURL;
         const sysfolder=new SystemFolder({name,location,fullpath});
         callback&&callback(sysfolder);
         return sysfolder;
-    }).
-    catch(error=>{
+    }).catch(error=>{
         fallback&&fallback(error);
+        return Promise.reject(error);
     });
+    else throw new Error("invalid folder name: "+name);
 }
 
 class SystemFolder extends SystemEntry {
@@ -38,7 +46,7 @@ class SystemFolder extends SystemEntry {
     }
 
     useEntries(callback,fallback){return new Promise((resolve,reject)=>{
-        if(cordova.platformId==="browser"){resolve()}
+        if(cordova.platformId==="browser") resolve();
         else{
             window.resolveLocalFileSystemURL(this.fullpath,(entry)=>{
                 const reader=entry.createReader();
@@ -64,10 +72,12 @@ class SystemFolderEntry {
     }
 
     toSystemFile(callback,fallback){
-        return this.isFile?useSystemFile(this.fullpath,callback,fallback):(fallback&&fallback({message:"entry not a file"}));
+        if(this.isFile) return useSystemFile(this.fullpath,callback,fallback);
+        else return fallback&&fallback({message:"the entry is not a file"});
     }
 
     toSystemFolder(callback,fallback){
-        return this.isFile?(fallback&&fallback({message:"entry not a folder"})):useSystemFolder(this.fullpath,callback,fallback);
+        if(this.isFile) return fallback&&fallback({message:"the entry is not a folder"});
+        else return useSystemFolder(this.fullpath,callback,fallback);
     }
 }

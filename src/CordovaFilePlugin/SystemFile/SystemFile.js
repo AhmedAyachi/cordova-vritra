@@ -1,3 +1,4 @@
+import {isValidFileName} from "../index";
 import SystemEntry,{getSystemEntryProps} from "../SystemEntry/SystemEntry";
 
 
@@ -6,7 +7,7 @@ import SystemEntry,{getSystemEntryProps} from "../SystemEntry/SystemEntry";
  */
 export default function useSystemFile(props,callback,fallback){
     const {location,name="NewFile.txt"}=getSystemEntryProps(props);
-    return new Promise((resolve,reject)=>{
+    if(isValidFileName(name)) return new Promise((resolve,reject)=>{
         if(cordova.platformId==="browser"){
             setTimeout(()=>{
                 if(name){
@@ -15,9 +16,7 @@ export default function useSystemFile(props,callback,fallback){
                     }
                     resolve();
                 }
-                else{
-                    reject({message:"file must have a name"});
-                }
+                else reject({message:"file must have a name"});
             },timeout);
         }
         else if(cordova.platformId==="electron"){
@@ -41,7 +40,9 @@ export default function useSystemFile(props,callback,fallback){
     }).
     catch(error=>{
         fallback&&fallback(error);
+        return Promise.reject(error);
     });
+    else throw new Error("invalid file name: "+name);
 }
 
 class SystemFile extends SystemEntry {
