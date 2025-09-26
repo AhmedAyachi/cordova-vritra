@@ -7,7 +7,7 @@ export default function ActionGrid(props){
     const {parent,actionIds,actionColor,multiple=true,sinistral,onPick,onUnmount}=props;
     const actiongrid=View({
         parent,style:styles.actiongrid(sinistral),
-        className:`${css.actiongrid} ${props.className||""}`,
+        className:[css.actiongrid,props.className],
     }),state={
         actions:getActions(actionIds),
     },{actions}=state;
@@ -57,7 +57,7 @@ const statics={
             },
         })),
         ...[
-            ((cordova.platformId==="ios")&&{id:"image",icon:image0}),
+            ((window.cordova?.platformId==="ios")&&{id:"image",icon:image0}),
             {id:"file",icon:file0},
         ].filter(action=>action).map(action=>({
             ...action,
