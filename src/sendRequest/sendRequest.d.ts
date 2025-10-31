@@ -15,11 +15,11 @@ export default function sendRequest(
         /**
          * Url search params
          */
-        searchParams?:[string:any],
+        searchParams?:[string:string],
         /**
          * In milliseconds
          * @default 3000
-         * @notice pass 0 to disable the timeout.
+         * @notice 0 to disable.
          */
         timeout?:number,
         /**

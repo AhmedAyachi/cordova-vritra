@@ -12,20 +12,33 @@ export default (url,options)=>new Promise((resolve,reject)=>{
     for(const key in headers){
         request.setRequestHeader(key,headers[key]);
     };
-    request.onreadystatechange=()=>{
-        if(request.readyState===XMLHttpRequest.DONE){
-            const response=new Response(request.responseText);
+    request.onload=()=>{
+        const {status}=request;
+        if((200<=status)&&(status<=599)){
+            const response=new Response(request.responseText,{
+                status,
+                statusText:request.statusText,
+            });
             resolve(response);
         }
-    };
+        else reject(new Error("unknown status code: "+status));
+    }
+    request.onabort=()=>{
+        const error=new Error("request aborted");
+        error.aborted=true;
+        reject(error);
+    }
     request.onerror=()=>{
-        reject(new Error("Network error or request blocked"));
+        reject(new Error("request error: network error or request blocked"));
     };
     if(timeout){
         request.timeout=timeout;
         request.ontimeout=()=>{
-            reject({message:"request timeout",timeout:true});
+            const error=new Error("network error or request timeout");
+            error.timeout=true;
+            reject(error);
         };
     }
-    request.send(typeof(body)==="string"?body:JSON.stringify(body));
+    if(body instanceof FormData) request.send(body);
+    else request.send(typeof(body)==="string"?body:JSON.stringify(body));
 });

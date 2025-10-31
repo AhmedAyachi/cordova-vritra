@@ -46,7 +46,7 @@ class SystemFolder extends SystemEntry {
     }
 
     useEntries(callback,fallback){return new Promise((resolve,reject)=>{
-        if(cordova.platformId==="browser") resolve();
+        if(cordova.platformId==="browser") resolve([]);
         else{
             window.resolveLocalFileSystemURL(this.fullpath,(entry)=>{
                 const reader=entry.createReader();
@@ -68,16 +68,23 @@ class SystemFolderEntry {
         this.isFile=props.isFile;
         this.name=props.name;
         this.fullpath=props.nativeURL;
-        Object.seal(this);
     }
 
     toSystemFile(callback,fallback){
         if(this.isFile) return useSystemFile(this.fullpath,callback,fallback);
-        else return fallback&&fallback({message:"the entry is not a file"});
+        else return new Promise((_,reject)=>{
+            const error=new Error("the entry is not a file");
+            fallback&&fallback(error);
+            reject(error);
+        });
     }
 
     toSystemFolder(callback,fallback){
-        if(this.isFile) return fallback&&fallback({message:"the entry is not a folder"});
+        if(this.isFile) return new Promise((_,reject)=>{
+            const error=new Error("the entry is not a folder");
+            fallback&&fallback(error);
+            reject(error);
+        });  
         else return useSystemFolder(this.fullpath,callback,fallback);
     }
 }
