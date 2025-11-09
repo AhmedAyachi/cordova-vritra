@@ -1,7 +1,7 @@
 
 
 export default (url,options)=>new Promise((resolve,reject)=>{
-    const {method,headers,body,searchParams,timeout=3000}=options||{};
+    const {method,headers,body,searchParams,timeout=3000,signal}=options||{};
     const request=new XMLHttpRequest();
     request.withCredentials=Boolean(options.withCredentials||options.credentials);
     const requestUrl=new URL(url);
@@ -23,10 +23,16 @@ export default (url,options)=>new Promise((resolve,reject)=>{
         }
         else reject(new Error("unknown status code: "+status));
     }
-    request.onabort=()=>{
-        const error=new Error("request aborted");
-        error.aborted=true;
-        reject(error);
+    if(signal instanceof AbortSignal){
+        signal.addEventListener("abort",()=>{
+            request.abort();
+        });
+        request.onabort=()=>{
+            const error=new Error("request aborted");
+            error.name="AbortError";
+            error.aborted=true;
+            reject(error);
+        }
     }
     request.onerror=()=>{
         reject(new Error("request error: network error or request blocked"));
@@ -34,7 +40,8 @@ export default (url,options)=>new Promise((resolve,reject)=>{
     if(timeout){
         request.timeout=timeout;
         request.ontimeout=()=>{
-            const error=new Error("network error or request timeout");
+            const error=new Error("request timeout or network error");
+            error.name="TimeoutError";
             error.timeout=true;
             reject(error);
         };

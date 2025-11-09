@@ -23,6 +23,10 @@ export default function sendRequest(
          */
         timeout?:number,
         /**
+         * An AbortSignal to set request's signal.
+         */
+        signal?:AbortSignal,
+        /**
          * @default false
          */
         withCredentials?:boolean,
