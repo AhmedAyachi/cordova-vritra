@@ -2,9 +2,9 @@
 
 export interface SystemEntry {
     
-    readonly name:String;
-    readonly fullpath:String;
-    readonly location:String;
+    readonly name:string;
+    readonly fullpath:string;
+    readonly location:string;
 
     /**
      * 

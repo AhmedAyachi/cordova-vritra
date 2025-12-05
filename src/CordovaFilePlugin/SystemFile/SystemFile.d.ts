@@ -48,17 +48,17 @@ export interface SystemFile extends SystemEntry {
      * @deprecated use readAsText instead
      * Reads the file content as text
      */
-    onRead(callback:(content:String)=>void,fallback:SystemEntryFallback):void;
+    onRead(callback:(content:string)=>void,fallback:SystemEntryFallback):void;
 
     /**
      * Reads the file content as text
      */
-    readAsText(callback:(content:String)=>void,fallback:SystemEntryFallback):Promise<String>;
+    readAsText(callback:(content:string)=>void,fallback:SystemEntryFallback):Promise<string>;
 
     /**
      * Reads a file as data url.
      * 
      * @see Use it to read for example image files to get the image content as base64 string
      */
-    readAsDataURL(callback:(data:string|null)=>void,fallback:SystemEntryFallback):Promise<String|null>;
+    readAsDataURL(callback:(data:string|null)=>void,fallback:SystemEntryFallback):Promise<string|null>;
 }

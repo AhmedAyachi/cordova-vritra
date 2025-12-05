@@ -39,8 +39,8 @@ interface SystemFolder extends SystemEntry {
 }
 
 interface SystemFolderEntry {
-    readonly name:String,
-    readonly fullpath:String,
+    readonly name:string,
+    readonly fullpath:string,
     readonly isFile:Boolean,
 
     toSystemFile(
